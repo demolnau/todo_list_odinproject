@@ -5,6 +5,7 @@
     --burntOrange: #C56A19;
     --sageGreen: #b0bb9d;
     --olive:#a0ac8b;
+    --darkerOlive: #939e7e;
     --jadeGreen: #387A5C;
     --emerald: #013832;
 }
@@ -239,10 +240,13 @@ textarea:focus{
 }
 
 .notes_item{
-  background-color: var(--jadeGreen);
+  background-color: var(--olive);
   margin: 0.2em;
   padding: 0.2em 0.3em 0.2em 0.3em;
   border-radius: 5px;
+}
+.notes_item:hover{
+  background-color: var(--darkerOlive);
 }
 .notes_title, .notes_description{
   margin: 0.5%;

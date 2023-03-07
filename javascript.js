@@ -325,7 +325,7 @@ const add_modal = function(){
         const notes_description = document.createElement("textarea")
         notes_description.setAttribute("type","text");
         notes_description.setAttribute("id","notes_description");
-        notes_description.setAttribute("placeholder","Details")
+        notes_description.setAttribute("placeholder","Add description here. If you are creating a list, seperate items by a comma.")
         notes_form.appendChild(notes_description);
 
         const notes_select_label = document.createElement("label")

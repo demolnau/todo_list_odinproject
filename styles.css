@@ -54,7 +54,7 @@ button{
 }
 
 button:hover{
-    background-color: var(--jadeGreen);
+  background-color: var(--jadeGreen);
 }
 
 
@@ -163,7 +163,7 @@ li {
   font-size: 1.0rem;
 }
 li:hover{
-  background-color: var(--jadeGreen);
+  background-color: var(--darkerOlive);
 }
 input[type=text] {
   font-family: Cormorant;
@@ -200,8 +200,6 @@ textarea:focus{
   font-size: 0.8rem;
 }
 
-
-
 #create_button{
   display:inline-block;
   text-align: center;
@@ -218,12 +216,16 @@ textarea:focus{
   font-size: 0.9em;
 }
 
-#priority_btn:hover, #temporal_btn:hover, .collapsible:hover, .active{
+#priority_btn:hover, #temporal_btn:hover, .collapsible:hover, .active, .priority_set{
   background-color: var(--jadeGreen);
 }
 
 /*
 .active, .collapsible:hover {
+  background-color: var(--jadeGreen);
+  
+}
+.priority_set{
   background-color: var(--jadeGreen);
 }
 */
@@ -235,9 +237,7 @@ textarea:focus{
   background-color: var(--jadeGreen);
 }
 
-.priority_set{
-  background-color: var(--jadeGreen);
-}
+
 
 .notes_item{
   background-color: var(--olive);

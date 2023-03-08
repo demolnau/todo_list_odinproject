@@ -67,8 +67,10 @@ const reprioritize = function(list_of_things){
     return(sorted_by_priority);
 }
 
-
+//render modal (the plus tab)
 const add_modal = function(){
+    
+    //render "create new note" tab in modal
     const create_note = function(){
         const notes_form = document.createElement("div")
         notes_form.style.display="flex"
@@ -124,7 +126,7 @@ const add_modal = function(){
         }
         rightside_modal.append(create_button)
     }
-    
+    //render "create new project" tab in modal
     const create_project= function(){
         const projects_form = document.createElement("div");
         projects_form.style.display = "flex";
@@ -147,7 +149,7 @@ const add_modal = function(){
         }
         rightside_modal.append(create_button);
     }
-
+    //"create a new todo list item" tab in modal 
     const create_todo =function(){
         const todo_form = document.createElement("div");
         todo_form.style.display="flex";
@@ -164,16 +166,15 @@ const add_modal = function(){
         todo_description.setAttribute("placeholder","Details")
         todo_form.appendChild(todo_description);
 
-        //TODO add a dropdown to add to project with default as null
+      
 
         const priority_container = document.createElement("div")
         priority_container.style.display="flex";
         priority_container.textContent="Priority: "
         priority_container.style.fontSize = "15px"
         priority_container.style.alignContent="center";
-        //make default priority low
 
-        
+
         const low_priority = document.createElement("button")
         low_priority.textContent="low";
         low_priority.setAttribute("id","priority_btn");
@@ -214,11 +215,6 @@ const add_modal = function(){
         temporal_container.appendChild(due_someday)
         
         let project_selection =null;
-
-
-        
-        //dropdown text
-        
         const dropdown=document.createElement("div")
         dropdown.classList.add("dropdown")
         const dropdown_label=document.createElement("label")
@@ -233,7 +229,6 @@ const add_modal = function(){
         for(let i=0;i<myProjects.projects_list.length;i++){
             const proj_dropdown_btn = document.createElement("a");
             proj_dropdown_btn.setAttribute("value",`${myProjects.projects_list[i].title}`)
-            //console.log(`#${myProjects.projects_list[i].title}`)
             proj_dropdown_btn.textContent=myProjects.projects_list[i].title
             project_dropdown_content.appendChild(proj_dropdown_btn)
             proj_dropdown_btn.onclick= function(){
@@ -250,13 +245,9 @@ const add_modal = function(){
             project_dropdown_content.style.display = "block"
         }
         
-
-
         const create_button= document.createElement("button");
         create_button.setAttribute("id", "create_button");
         create_button.textContent = "Create";
-
-        
 
         rightside_modal.appendChild(todo_form);
         rightside_modal.appendChild(priority_container);
@@ -313,53 +304,64 @@ const add_modal = function(){
     }
 
 
-    
-    const project_button_modal = document.createElement("button")
-    project_button_modal.setAttribute("id","project_button_modal")
-    project_button_modal.textContent="Projects"
-    project_button_modal.onclick=function(){
-        console.log(project_active)
-        if(project_active==false){
-            rightside_modal.innerHTML="";
-            create_project();
-            project_active=true;
-            todo_active=false;
-            notes_active=false;
-            console.log("project tab on module is now active")
+    // render project button on left side of modal
+    const render_project_button_modal =function(){
+        const project_button_modal = document.createElement("button")
+        project_button_modal.setAttribute("id","project_button_modal")
+        project_button_modal.textContent="Projects"
+        project_button_modal.onclick=function(){
+            console.log(project_active)
+            if(project_active==false){
+                rightside_modal.innerHTML="";
+                create_project();
+                project_active=true;
+                todo_active=false;
+                notes_active=false;
+                console.log("project tab on module is now active")
+            }
         }
+        leftside_modal.append(project_button_modal)
     }
 
 
-    const todo_button_modal = document.createElement("button")
-    todo_button_modal.setAttribute("id","todo_modal")
-    todo_button_modal.textContent="Todo"
-    todo_button_modal.onclick = function(){
-        if (todo_active==false){
-            rightside_modal.innerHTML="";
-            create_todo();
-            todo_active=true;
-            project_active=false;
-            notes_active=false;
+    //render todo button on left side of modal
+    const render_todo_button_modal =function(){
+        const todo_button_modal = document.createElement("button")
+        todo_button_modal.setAttribute("id","todo_modal")
+        todo_button_modal.textContent="Todo"
+        todo_button_modal.onclick = function(){
+            if (todo_active==false){
+                rightside_modal.innerHTML="";
+                create_todo();
+                todo_active=true;
+                project_active=false;
+                notes_active=false;
+            }
         }
+        leftside_modal.append(todo_button_modal)
     }
 
 
-    const notes_button_modal = document.createElement("button")
-    notes_button_modal.setAttribute("id","notes_button_modal")
-    notes_button_modal.textContent="Notes"
-    notes_button_modal.onclick = function(){
-        console.log(notes_active==false)
-        console.log("clicked notes in modal")
-        if (notes_active==false){
-            rightside_modal.innerHTML="";
-            create_note();
-            notes_active=true;
-            project_active=false;
-            todo_active=false;
-            console.log("notes tab on modal now active")
-            //console.log(notes_active)
+    // render notes button on left side of modal
+    const render_notes_button_modal =function(){
+        const notes_button_modal = document.createElement("button")
+        notes_button_modal.setAttribute("id","notes_button_modal")
+        notes_button_modal.textContent="Notes"
+        notes_button_modal.onclick = function(){
+            console.log(notes_active==false)
+            console.log("clicked notes in modal")
+            if (notes_active==false){
+                rightside_modal.innerHTML="";
+                create_note();
+                notes_active=true;
+                project_active=false;
+                todo_active=false;
+                console.log("notes tab on modal now active")
+            }
         }
+        leftside_modal.append(notes_button_modal)
     }
+
 
     let todo_active=false;
     let project_active=false;
@@ -407,9 +409,9 @@ const add_modal = function(){
     const rightside_modal = document.createElement("div")
     rightside_modal.setAttribute("id","rightside")
 
-    leftside_modal.append(todo_button_modal)
-    leftside_modal.append(project_button_modal)
-    leftside_modal.append(notes_button_modal)
+    render_todo_button_modal();
+    render_project_button_modal();
+    render_notes_button_modal();
     
     modal_upper.appendChild(modal_header)
     modal_upper.appendChild(span_modal)
@@ -424,6 +426,7 @@ const add_modal = function(){
     
 }
 
+//render project
 const project_rendered = function(){
     //console.log("project button clicked")
     rightside.innerHTML="";
@@ -440,7 +443,7 @@ const project_rendered = function(){
     }
 }
 
-
+//render a todo list
 const todo_button_list_render = function(list_of_todo_items){
     console.log("todo list button clicked");
     const todo_list_start = document.createElement("ul");
@@ -523,20 +526,20 @@ const todo_button_list_render = function(list_of_todo_items){
 
 
 
-
+//render notes tab
 function render_notes(list_of_notes){
     console.log("Notes rendered")
     console.log(list_of_notes.notes_list[0].title)
     const notes_container = document.createElement("div")
 
     for(let i=0; i<list_of_notes.notes_list.length;i++){
-        //console.log(`${list_of_notes.notes_list[i]}`)
         const notes_item = document.createElement("div")
         notes_item.classList.add("notes_item")
+
         const span_modal = document.createElement("span")
         span_modal.setAttribute("class","close")
         span_modal.innerHTML = "&times;";
-        //span_modal.style.backgroundColor="var(--sageGreen)";
+
         span_modal.onclick = function(){
             notes_item.style.display = "none"
             for(let k=0;k<myNotes.notes_list.length;k++){
@@ -548,7 +551,6 @@ function render_notes(list_of_notes){
         notes_header.style.display="flex"
         notes_header.style.justifyContent="space-between";
         notes_header.style.alignItems="baseline";
-        //notes_header.style.alignContents="stretch";
 
         const notes_item_title =document.createElement("div")
         notes_item_title.classList.add("notes_title")
@@ -610,13 +612,11 @@ function render_notes(list_of_notes){
     today_button.setAttribute("id","today");
     today_button.textContent="Today";
 
-    //console.log(items_due_today.length)
 
     today_button.onclick = function(){
         rightside.innerHTML="";
         var items_due_today = reprioritize(arrange_by_time().dueToday);
         todo_button_list_render(items_due_today);
-        //todo_button_list_render.apply(this, items_due_today);
     }
 
     const tomorrow_button = document.createElement("button")
